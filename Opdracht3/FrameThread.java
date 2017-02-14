@@ -57,7 +57,12 @@ public class FrameThread extends Thread{
             }
 
             if(e.getSource() == reset){
-                stopwatch.difference = 0;
+                try{
+                stopwatch.sleep(2000);
+                }
+
+                catch(InterruptedException error){
+                }
             }
         }
     }

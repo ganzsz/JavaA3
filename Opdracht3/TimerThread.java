@@ -10,4 +10,10 @@ public class TimerThread extends Thread{
                 System.out.println(difference);
             }
     }
+
+    public void sleep(){
+
+        difference = 0;
+
+    }
 }
