@@ -5,19 +5,9 @@ public class TimerThread extends Thread{
     public void run(){
 
     long starttime = System.currentTimeMillis();
-
-        while(difference < 200000000){
-            try{
+        while(difference < 20000){
                 difference = System.currentTimeMillis() - starttime;
                 System.out.println(difference);
-                if(pause){
-                    throw new InterruptedException();
-                }
             }
-            catch(InterruptedException e){
-                difference = 0;
-                break;
-            }
-        }
     }
 }

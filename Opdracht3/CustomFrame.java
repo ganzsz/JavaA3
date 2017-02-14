@@ -6,6 +6,7 @@ import java.text.ParseException;
 import java.awt.*;
 
 public class CustomFrame extends JFrame{
+
     private JLabel time;
     private JButton start;
     private JButton pause;
@@ -22,7 +23,6 @@ public class CustomFrame extends JFrame{
     public CustomFrame(){
         x = new MyMouse();
         stopwatch = new TimerThread();
-        counter = false;
         setLayout(new java.awt.GridLayout(4,3));
         setSize(600,400);
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -35,7 +35,7 @@ public class CustomFrame extends JFrame{
         start.addMouseListener(x);
         pause.addMouseListener(x);
         reset.addMouseListener(x);
-
+        counter = false;
 
         add(time);
         add(start);
@@ -54,12 +54,14 @@ public class CustomFrame extends JFrame{
 
             if(e.getSource() == start){
                 stopwatch.start();
+                counter = false;
 
             }
 
             if(e.getSource() == reset){
-                stopwatch.interrupt();
+                //stopwatch.interrupt();
             }
+
         }
     }
 }
