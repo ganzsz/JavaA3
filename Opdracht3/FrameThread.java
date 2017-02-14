@@ -12,11 +12,13 @@ public class FrameThread extends Thread{
     private JButton reset;
     private JFrame f;
     private String solution;
-    public boolean counter;
-    TimerThread stopwatch;
-    MyMouse x;
+    private boolean counter;
+    private TimerThread stopwatch;
+    private MyMouse x;
+    private boolean stop;
 
     public FrameThread(){
+        stop = false;
         f = new JFrame("Assignment 3");
         x = new MyMouse();
         stopwatch = new TimerThread();
@@ -42,8 +44,16 @@ public class FrameThread extends Thread{
         }
 
     public void run(){
-        while(stopwatch.difference < 10000)
+        while(stopwatch.difference < 1000000)
         time.setText(Long.toString(stopwatch.difference));
+            while(stop == true){
+                try{
+                stopwatch.wait();
+                }
+                catch(InterruptedException stop){
+
+                }
+            }
     }
 
     private class MyMouse extends MouseAdapter{
@@ -57,12 +67,7 @@ public class FrameThread extends Thread{
             }
 
             if(e.getSource() == reset){
-                try{
-                stopwatch.sleep(2000);
-                }
-
-                catch(InterruptedException error){
-                }
+                stop = true;
             }
         }
     }
