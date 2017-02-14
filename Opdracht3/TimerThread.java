@@ -10,7 +10,7 @@ public class TimerThread extends Thread{
         try{
             difference = System.currentTimeMillis() - starttime;
             System.out.println(difference);
-            if(difference > 90000){
+            if(difference > 900000){
                 throw new InterruptedException();
             }
         }
