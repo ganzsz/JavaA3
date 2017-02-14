@@ -1,11 +1,14 @@
+import javax.swing.*;
+import java.awt.event.*;
+import java.text.ParseException;
+import java.awt.*;
+
 public class App{
 
     public static void main(String [] args) throws InterruptedException{
 
-        TimerThread x = new TimerThread();
-        x.run();
-        System.out.println(x.getDifference());
-        x.sleep(1000);
+        FrameThread i = new FrameThread();
+        i.start();
 
     }
 }
