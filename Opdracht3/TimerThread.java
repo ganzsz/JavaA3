@@ -23,5 +23,6 @@ public class TimerThread extends Thread{
 
     public void sleep(){
         while(difference < 1000000){
+        }
     }
 }

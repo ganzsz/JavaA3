@@ -46,14 +46,6 @@ public class FrameThread extends Thread{
     public void run(){
         while(stopwatch.difference < 1000000)
         time.setText(Long.toString(stopwatch.difference));
-            while(stop == true){
-                try{
-                stopwatch.wait();
-                }
-                catch(InterruptedException stop){
-
-                }
-            }
     }
 
     private class MyMouse extends MouseAdapter{
