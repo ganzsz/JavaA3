@@ -29,7 +29,7 @@ public class Calculations{
             calculations[3] = (currentTime.getTimeInMillis() - bday1.getTimeInMillis()) / 1000 / 60 / 60;
             calculations[4] = (currentTime.getTimeInMillis() - bday1.getTimeInMillis()) / 1000 / 60 / 60 /24;
             calculations[5] = (currentTime.getTimeInMillis() - bday1.getTimeInMillis()) / 1000 / 60 / 60 /24 / 365;
-            if(Integer.parseInt(birthDayString.substring(0,2)) > 31 || (Integer.parseInt(birthDayString.substring(0,2)) < 1)){
+            if(Integer.parseInt(birthDayString.substring(0,2)) > 31 || Integer.parseInt(birthDayString.substring(0,2)) < 1){
 
                 return "Date is not entered correctly";
 
@@ -75,7 +75,7 @@ public class Calculations{
                 calculations[i] -= calculations[i] * 2;
             }
 
-            if(((Integer.parseInt(birthDayString.substring(0,2)) > 31 || (Integer.parseInt(birthDayString.substring(0,2)) < 1))) || (((Integer.parseInt(birthDayString2.substring(0,2)) > 31) || (Integer.parseInt(birthDayString2.substring(0,2)) < 1)))){
+            if((Integer.parseInt(birthDayString.substring(0,2)) > 31 || (Integer.parseInt(birthDayString.substring(0,2)) < 1)) || (Integer.parseInt(birthDayString2.substring(0,2)) < 0 || Integer.parseInt(birthDayString2.substring(0,2)) > 31)){
 
                 return "Date is not entered correctly";
 

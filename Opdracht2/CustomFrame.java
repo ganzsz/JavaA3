@@ -94,6 +94,7 @@ public class CustomFrame extends JFrame {
                 birthDay1String = bday1Input.getText();
                 solution = Calculations.calculateAge(birthDay1String, i);
                 output.setText(solution);
+
             }
             else if(e.getSource() == calculateDifference){
                 birthDay1String = bday1Input.getText();
