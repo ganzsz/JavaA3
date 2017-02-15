@@ -17,8 +17,8 @@ public class CustomFrame extends JFrame {
     private JLabel info;
     private JButton calculateAge;
     private JButton calculateDifference;
-    private JComboBox differenceList;
     private String [] StringList = {"Milliseconds", "Seconds", "Minutes" , "Hours", "Days", "Years"};
+    private JComboBox <String> differenceList;
     private int i;
     private String birthDay1String;
     private String birthDay2String;
@@ -51,7 +51,7 @@ public class CustomFrame extends JFrame {
         calculateDifference.setForeground(Color.red);
         calculateDifference.setOpaque(true);
 
-        differenceList = new JComboBox(StringList);
+        differenceList = new JComboBox<String>(StringList);
         output = new JLabel();
         output.setOpaque(true);
         output.setForeground(Color.blue);

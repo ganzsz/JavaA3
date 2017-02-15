@@ -11,13 +11,13 @@ public class Calculations{
     * @param i Staat voor welke tijdseenheid gekozen is.
     * @return calculations geeft de juist tijdeenheid terug.
     */
-    public static String calculateAge(String a, int i){
+    public static String calculateAge(String A, int i){
 
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy");
         long [] calculations = new long [6];
         try{
 
-            String birthDayString = a;
+            String birthDayString = A;
 
             Calendar bday1 = new GregorianCalendar();
             Calendar currentTime = Calendar.getInstance();
