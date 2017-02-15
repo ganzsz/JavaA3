@@ -1,28 +1,25 @@
 public class TimerThread extends Thread{
 
     public long difference;
-    public boolean pause;
-    private boolean stop;
-    public void run(){
+    public boolean reset;
+    long starttime;
 
-    long starttime = System.currentTimeMillis();
-        while(difference < 1000000){
-        try{
-            difference = System.currentTimeMillis() - starttime;
-            System.out.println(difference);
-            if(difference > 900000){
-                throw new InterruptedException();
-            }
-        }
-        catch(InterruptedException e){
-            System.out.println("EXIT PROGRAM");
-            break;
-        }
+    public TimerThread(){
+        reset = true;
+        difference = 0;
     }
-}
 
-    public void sleep(){
-        while(difference < 1000000){
+    public void run(){
+        while(difference < 900000){
+            starttime = System.currentTimeMillis();
+            while(reset == false){
+                System.out.println(reset);
+                difference = System.currentTimeMillis() - starttime;
+                //System.out.println(difference);
+            }
+            while(reset == true){
+                difference = 0;
+            }
         }
     }
 }

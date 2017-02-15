@@ -18,6 +18,7 @@ public class FrameThread extends Thread{
     private boolean stop;
 
     public FrameThread(){
+
         stop = false;
         f = new JFrame("Assignment 3");
         x = new MyMouse();
@@ -41,12 +42,15 @@ public class FrameThread extends Thread{
         f.add(reset);
 
         f.setVisible(true);
-        }
+
+    }
 
     public void run(){
-        while(stopwatch.difference < 1000000)
-        time.setText(Long.toString(stopwatch.difference));
-    }
+        stopwatch.start();
+        while(stopwatch.difference < 1000000){
+            time.setText(Long.toString(stopwatch.difference));
+            }
+        }
 
     private class MyMouse extends MouseAdapter{
 
@@ -54,12 +58,14 @@ public class FrameThread extends Thread{
 
             if(e.getSource() == start){
 
-                stopwatch.start();
+                stopwatch.reset = false;
+                //System.out.println(stopwatch.pause);
 
             }
 
             if(e.getSource() == reset){
-                stop = true;
+                stopwatch.reset = true;
+                //System.out.println(stopwatch.pause);
             }
         }
     }
