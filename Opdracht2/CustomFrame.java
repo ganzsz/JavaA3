@@ -24,45 +24,44 @@ public class CustomFrame extends JFrame {
     private String birthDay2String;
     private JFrame f;
     private String solution;
-
+    private JPanel topPanel;
+    private JPanel bottomPanel;
+    private JPanel inputPanel;
     /**
     *Constructor
     */
     public CustomFrame(){
         MyMouse x = new MyMouse();
-        setLayout(new java.awt.GridLayout(4,3));
-        setSize(600,400);
+        setLayout(new java.awt.FlowLayout());
+        setSize(300,300);
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         //initialiseer componenten
         info = new JLabel("Format : dd-MMM-yyyy");
         bday1Input = new JTextField(11);
         bday2Input = new JTextField(11);
-        output  = new JLabel("");
+        output  = new JLabel("Welcome to the Date Calculator");
         calculateAge = new JButton("Calcate your age");
         calculateDifference = new JButton("Calculate the difference between 2 dates");
+        topPanel = new JPanel();
+        topPanel.setLayout(new BoxLayout(topPanel, BoxLayout.PAGE_AXIS));
+        bottomPanel = new JPanel();
+        bottomPanel.setLayout(new BoxLayout(bottomPanel, BoxLayout.PAGE_AXIS));
+        inputPanel = new JPanel();
+        inputPanel.setLayout(new BoxLayout(inputPanel, BoxLayout.PAGE_AXIS));
         calculateAge.addMouseListener(x);
         calculateDifference.addMouseListener(x);
-        calculateAge.setBackground(Color.gray);
-        calculateAge.setForeground(Color.red);
-        calculateAge.setOpaque(true);
-
-        calculateDifference.setBackground(Color.gray);
-        calculateDifference.setForeground(Color.red);
-        calculateDifference.setOpaque(true);
-
         differenceList = new JComboBox<String>(StringList);
-        output = new JLabel();
-        output.setOpaque(true);
-        output.setForeground(Color.blue);
-
-        add(output);
-        add(differenceList);
-        add(bday1Input);
-        add(bday2Input);
-        add(calculateAge);
-        add(calculateDifference);
-        add(info);
+        topPanel.add(differenceList);
+        inputPanel.add(bday1Input);
+        inputPanel.add(bday2Input);
+        bottomPanel.add(calculateAge);
+        bottomPanel.add(calculateDifference);
+        bottomPanel.add(info);
+        bottomPanel.add(output);
+        add(topPanel);
+        add(inputPanel);
+        add(bottomPanel);
 
         setVisible(true);
         }
