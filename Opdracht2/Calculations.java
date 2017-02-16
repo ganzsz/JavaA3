@@ -14,11 +14,10 @@ public class Calculations{
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MM uuuu").withResolverStyle(ResolverStyle.STRICT);
             LocalDate bdayDate = LocalDate.parse(bday,formatter);
             LocalTime time = LocalTime.now();
-            LocalTime zero = LocalTime.now();
-            zero.with(LocalTime.MIDNIGHT);
+            LocalTime zero = time.with(LocalTime.MIN);
             LocalDateTime finalBday = LocalDateTime.of(bdayDate, zero);
+            differenceList[0] = finalBday.until( currentDate, ChronoUnit.MILLIS);
             differenceList[1] = finalBday.until( currentDate, ChronoUnit.SECONDS);
-            differenceList[0] = differenceList[1] * 1000; //milliseconds
             differenceList[2] = finalBday.until( currentDate, ChronoUnit.MINUTES);
             differenceList[3] = finalBday.until( currentDate, ChronoUnit.HOURS);
             differenceList[4] = finalBday.until( currentDate, ChronoUnit.DAYS);
@@ -38,8 +37,8 @@ public class Calculations{
             LocalTime time = LocalTime.now();
             LocalDateTime finalBday1 = LocalDateTime.of(bdayDate1, time);
             LocalDateTime finalBday2 = LocalDateTime.of(bdayDate2, time);
+            differenceList[0] = finalBday1.until( finalBday2, ChronoUnit.MILLIS);
             differenceList[1] = finalBday1.until( finalBday2, ChronoUnit.SECONDS);
-            differenceList[0] = differenceList[1] * 1000; //milliseconds
             differenceList[2] = finalBday1.until( finalBday2, ChronoUnit.MINUTES);
             differenceList[3] = finalBday1.until( finalBday2, ChronoUnit.HOURS);
             differenceList[4] = finalBday1.until( finalBday2, ChronoUnit.DAYS);

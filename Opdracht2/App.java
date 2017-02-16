@@ -1,6 +1,3 @@
-
-import javax.swing.*;
-import java.awt.event.*;
 /**
 * @author Tommie Terhoeve
 * @version 1.0
