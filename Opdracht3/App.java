@@ -14,13 +14,14 @@ public class App{
     private static JPanel timerPanel;
 
     public static void main(String [] args){
-        DefaultListModel lapModel = new DefaultListModel();
-        JList lapTime = new JList(lapModel);
-        lapCounter = 1;
+        DefaultListModel<String> lapModel = new DefaultListModel<String>();
+        JList<String> lapTime = new JList<String>(lapModel);
+        lapCounter = 2;
         laps = new String[6];
-        for(int i = 0; i < 6; i++){
+        for(int i = 0; i < 7; i++){
             lapModel.addElement("00:00:00");
         }
+        lapModel.setElementAt("Laptimes", 1);
         startOrStop = true;
         pause = true;
         reset = false;
@@ -69,17 +70,16 @@ public class App{
                             lapModel.setElementAt(Long.toString(time), 0);
 
                             if(reset){
-                                if(lapCounter < 6){
-
+                                if(lapCounter < 7){
+                                    lapModel.setElementAt(Long.toString(time), lapCounter);
                                     lapCounter++;
                                     reset = false;
                                 }
                                 else{
-                                    lapCounter = 1;
-
+                                    lapCounter = 2;
+                                    lapModel.setElementAt(Long.toString(time), lapCounter);
                                     lapCounter++;
                                     reset = false;
-
                                 }
                                 pause = true;
                                 break;

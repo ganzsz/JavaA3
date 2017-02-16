@@ -13,7 +13,6 @@ public class App{
     * @param args standaard.
     */
     public static void main(String [] args){
-
         CustomFrame x = new CustomFrame();
 
     }
