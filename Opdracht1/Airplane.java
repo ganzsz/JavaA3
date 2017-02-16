@@ -51,7 +51,7 @@ public class Airplane{
             throw new CrashException();
         }
     }
-    //getters, setters niet nodig.
+    //getters
     public int getFlapFail(int i){
         if(flapFail[i] == true){
             return 1;

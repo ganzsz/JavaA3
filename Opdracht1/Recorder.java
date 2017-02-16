@@ -4,16 +4,16 @@
 * Dit is de Recorder klasse
 */
 public class Recorder{
-    private int crashes = 0;
-    private int [] flapFail = new int[2];
-    private int [] engineFail = new int[4];
-    private int [] pilotFail = new int[3];
-    private String crashedNumbers = "Dit zijn de neergestorte vliegtuigen: ";
-    private String crashDetails = "Dit is er gebeurt op vlucht: ";
     /**
     * Dit is de methode simulate die de Airplane objecten aanmaakt en defecte onderdelen registreerd.
     */
     public void simulate(){
+        int crashes = 0;
+        int [] flapFail = new int[2];
+        int [] engineFail = new int[4];
+        int [] pilotFail = new int[3];
+        String crashedNumbers = "Dit zijn de neergestorte vliegtuigen: ";
+        String crashDetails = "Dit is er gebeurt op vlucht: ";
         for(int i = 0; i < 1000000; i++){
             Airplane plane = new Airplane();
             //simuleer de vlucht
@@ -41,15 +41,15 @@ public class Recorder{
                 crashDetails = "Dit is er gebeurt op vlucht: ";
             }
             //totale aantal waarden uitrekenen
-            engineFail[0] += plane.getEngineFail(0);
-            engineFail[1] += plane.getEngineFail(1);
-            engineFail[2] += plane.getEngineFail(2);
-            engineFail[3] += plane.getEngineFail(3);
-            flapFail[0] += plane.getFlapFail(0);
-            flapFail[1] += plane.getFlapFail(1);
-            pilotFail[0] += plane.getPilotFail(0);
-            pilotFail[1] += plane.getPilotFail(1);
-            pilotFail[2] += plane.getPilotFail(2);
+            for(int j = 0; j < 2; j++){
+                flapFail[j] += plane.getFlapFail(j);
+            }
+            for(int j = 0; j < 4; j++){
+                engineFail[j] += plane.getEngineFail(j);
+            }
+            for(int j = 0; j < 3; j++){
+                pilotFail[j] += plane.getPilotFail(j);
+            }
             //indien de simulatie voledig is doorgelopen.
             if(i == 999999){
                 if(crashes == 0){
