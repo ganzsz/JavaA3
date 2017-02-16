@@ -19,7 +19,6 @@ public class Airplane{
     *@throws CrashException crashed
     */
     public void flight() throws CrashException{
-
         for(int i = 0; i < 2; i++){
             try{
                 flapList[i] = new Flap();
@@ -52,7 +51,6 @@ public class Airplane{
             throw new CrashException();
         }
     }
-
     //getters, setters niet nodig.
     public int getFlapFail(int i){
         if(flapFail[i] == true){

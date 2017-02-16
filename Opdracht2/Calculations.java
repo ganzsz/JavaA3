@@ -4,13 +4,14 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.temporal.ChronoUnit;
+import java.time.format.ResolverStyle;
 
 public class Calculations{
     public static String calculateAge (String bday, int i) {
         long[] differenceList = new long[6];
          try{
             LocalDateTime currentDate = LocalDateTime.now();
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MM yyyy");
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MM uuuu").withResolverStyle(ResolverStyle.STRICT);
             LocalDate bdayDate = LocalDate.parse(bday,formatter);
             LocalTime time = LocalTime.now();
             LocalTime zero = LocalTime.now();
@@ -31,7 +32,7 @@ public class Calculations{
     public static String calculateDifference (String bday1, String bday2, int i){
         long[] differenceList = new long[6];
          try{
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MM yyyy");
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MM uuuu").withResolverStyle(ResolverStyle.STRICT);
             LocalDate bdayDate1 = LocalDate.parse(bday1,formatter);
             LocalDate bdayDate2 = LocalDate.parse(bday2,formatter);
             LocalTime time = LocalTime.now();
