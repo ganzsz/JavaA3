@@ -10,7 +10,6 @@ import java.awt.*;
 * Deze classe is voor het initialiseren van frame objecten.
 */
 public class CustomFrame extends JFrame {
-
     private JTextField bday1Input;
     private JTextField bday2Input;
     private JLabel output;
@@ -35,9 +34,8 @@ public class CustomFrame extends JFrame {
         setLayout(new java.awt.FlowLayout());
         setSize(300,300);
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
         //initialiseer componenten
-        info = new JLabel("Format : dd-MMM-yyyy");
+        info = new JLabel("Format : dd MM yyyy");
         bday1Input = new JTextField(11);
         bday2Input = new JTextField(11);
         output  = new JLabel("Welcome to the Date Calculator");
@@ -62,43 +60,20 @@ public class CustomFrame extends JFrame {
         add(topPanel);
         add(inputPanel);
         add(bottomPanel);
-
         setVisible(true);
         }
 
     private class MyMouse extends MouseAdapter{
-
         public void mouseClicked(MouseEvent e){
-
-            int i = 0;
-            String eenheid = differenceList.getSelectedItem().toString();
-
-            if(eenheid == "Seconds"){
-                i = 1;
-            }
-            if(eenheid == "Minutes"){
-                i = 2;
-            }
-            if(eenheid == "Hours"){
-                i = 3;
-            }
-            if(eenheid == "Days"){
-                i = 4;
-            }
-            if(eenheid == "Years"){
-                i = 5;
-            }
-
             if(e.getSource() == calculateAge){
                 birthDay1String = bday1Input.getText();
-                solution = Calculations.calculateAge(birthDay1String, i);
+                solution = Calculations.calculateAge(birthDay1String, differenceList.getSelectedIndex());
                 output.setText(solution);
-
             }
             else if(e.getSource() == calculateDifference){
                 birthDay1String = bday1Input.getText();
                 birthDay2String = bday2Input.getText();
-                solution = Calculations.calculateDifference(birthDay1String, birthDay2String, i);
+                solution = Calculations.calculateDifference(birthDay1String, birthDay2String, differenceList.getSelectedIndex());
                 output.setText(solution);
             }
         }
