@@ -33,6 +33,7 @@ public class CustomFrame extends JFrame {
         setLayout(new java.awt.FlowLayout());
         setSize(300,300);
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Assignment 2");
         //initialiseer componenten
         info = new JLabel("Format : dd MM yyyy");
         bday1Input = new JTextField(11);
@@ -63,7 +64,7 @@ public class CustomFrame extends JFrame {
         }
 
     private class MyMouse extends MouseAdapter{
-        public void mouseClicked(MouseEvent e){
+        public void mouseReleased(MouseEvent e){
             if(e.getSource() == calculateAge){
                 birthDay1String = bday1Input.getText();
                 solution = Calculations.calculateAge(birthDay1String, differenceList.getSelectedIndex());

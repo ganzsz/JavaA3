@@ -47,27 +47,27 @@ public class Airplane{
             }
         }
         //simuleer elk onderdeel en indien het onderdeel faalt word de boolean op true gezet.
-        if((flapFail[0] == true && flapFail[1] == true) || ((engineFail[1] == true && engineFail[2] == true ) && (engineFail[0] == true || engineFail[3] == true)) || (pilotFail[0] == true && pilotFail[1] == true && pilotFail[2] == true)){
+        if((flapFail[0] && flapFail[1]) || ((engineFail[1] && engineFail[2]) && (engineFail[0] || engineFail[3])) || (pilotFail[0] && pilotFail[1] && pilotFail[2])){
             throw new CrashException();
         }
     }
     //getters
     public int getFlapFail(int i){
-        if(flapFail[i] == true){
+        if(flapFail[i]){
             return 1;
         }
         return 0;
     }
 
     public int getEngineFail(int i){
-        if(engineFail[i] == true){
+        if(engineFail[i]){
             return 1;
         }
         return 0;
     }
 
     public int getPilotFail(int i){
-        if(pilotFail[i] == true){
+        if(pilotFail[i]){
              return 1;
         }
         return 0;
