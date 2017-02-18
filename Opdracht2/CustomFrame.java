@@ -20,7 +20,6 @@ public class CustomFrame extends JFrame {
     private int i;
     private String birthDay1String;
     private String birthDay2String;
-    private JFrame f;
     private String solution;
     private JPanel topPanel;
     private JPanel bottomPanel;
@@ -31,7 +30,7 @@ public class CustomFrame extends JFrame {
     public CustomFrame(){
         MyMouse x = new MyMouse();
         setLayout(new java.awt.FlowLayout());
-        setSize(300,300);
+        setSize(300,200);
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Assignment 2");
         //initialiseer componenten

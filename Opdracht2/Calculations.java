@@ -8,42 +8,57 @@ import java.time.format.ResolverStyle;
 
 public class Calculations{
     public static String calculateAge (String bday, int i) {
-        long[] differenceList = new long[6];
+        long difference = 0;;
          try{
-            LocalDateTime currentDate = LocalDateTime.now();
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MM uuuu").withResolverStyle(ResolverStyle.STRICT);
             LocalDate bdayDate = LocalDate.parse(bday,formatter);
-            LocalTime time = LocalTime.now();
-            LocalTime zero = time.with(LocalTime.MIN);
-            LocalDateTime finalBday = LocalDateTime.of(bdayDate, zero);
-            differenceList[0] = finalBday.until( currentDate, ChronoUnit.MILLIS);
-            differenceList[1] = finalBday.until( currentDate, ChronoUnit.SECONDS);
-            differenceList[2] = finalBday.until( currentDate, ChronoUnit.MINUTES);
-            differenceList[3] = finalBday.until( currentDate, ChronoUnit.HOURS);
-            differenceList[4] = finalBday.until( currentDate, ChronoUnit.DAYS);
-            differenceList[5] = finalBday.until( currentDate, ChronoUnit.YEARS);
-            return Long.toString(differenceList[i]);
+            LocalTime zero = LocalTime.MIN;
+            LocalDateTime currentDateTime = LocalDateTime.now();
+            LocalDateTime bdayDateTime = LocalDateTime.of(bdayDate, zero);
+            switch(i){
+                case 0: difference = bdayDateTime.until( currentDateTime, ChronoUnit.MILLIS);
+                        return "Your age: " + Long.toString(difference) + " milliseconds";
+                case 1: difference = bdayDateTime.until( currentDateTime, ChronoUnit.SECONDS);
+                        return "Your age: " + Long.toString(difference) + " seconds";
+                case 2: difference = bdayDateTime.until( currentDateTime, ChronoUnit.MINUTES);
+                        return "Your age: " + Long.toString(difference) + " minutes";
+                case 3: difference = bdayDateTime.until( currentDateTime, ChronoUnit.HOURS);
+                        return "Your age: " + Long.toString(difference) + " hours";
+                case 4: difference = bdayDateTime.until( currentDateTime, ChronoUnit.DAYS);
+                        return "Your age: "+  Long.toString(difference) + " days";
+                case 5: difference = bdayDateTime.until( currentDateTime, ChronoUnit.YEARS);
+                        return "Your age: " + Long.toString(difference) + " years";
+            }
+            return "NO INPUT FOUND";
         }
         catch (DateTimeParseException e) {
             return "ERROR, have you used the correct format?";
         }
     }
     public static String calculateDifference (String bday1, String bday2, int i){
-        long[] differenceList = new long[6];
+        long difference = 0;
          try{
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MM uuuu").withResolverStyle(ResolverStyle.STRICT);
             LocalDate bdayDate1 = LocalDate.parse(bday1,formatter);
             LocalDate bdayDate2 = LocalDate.parse(bday2,formatter);
             LocalTime time = LocalTime.now();
-            LocalDateTime finalBday1 = LocalDateTime.of(bdayDate1, time);
-            LocalDateTime finalBday2 = LocalDateTime.of(bdayDate2, time);
-            differenceList[0] = finalBday1.until( finalBday2, ChronoUnit.MILLIS);
-            differenceList[1] = finalBday1.until( finalBday2, ChronoUnit.SECONDS);
-            differenceList[2] = finalBday1.until( finalBday2, ChronoUnit.MINUTES);
-            differenceList[3] = finalBday1.until( finalBday2, ChronoUnit.HOURS);
-            differenceList[4] = finalBday1.until( finalBday2, ChronoUnit.DAYS);
-            differenceList[5] = finalBday1.until( finalBday2, ChronoUnit.YEARS);
-            return Long.toString(Math.abs(differenceList[i]));
+            LocalDateTime localBday1 = LocalDateTime.of(bdayDate1, time);
+            LocalDateTime localBday2 = LocalDateTime.of(bdayDate2, time);
+            switch(i){
+                case 0: difference = localBday1.until( localBday2, ChronoUnit.MILLIS);
+                        return "The difference: " + Long.toString(difference) + " milliseconds";
+                case 1: difference = localBday1.until( localBday2, ChronoUnit.SECONDS);
+                        return "The difference: " + Long.toString(difference) + " seconds";
+                case 2: difference = localBday1.until( localBday2, ChronoUnit.MINUTES);
+                        return "The difference: " + Long.toString(difference) + " minutes";
+                case 3: difference = localBday1.until( localBday2, ChronoUnit.HOURS);
+                        return "The difference: " +  Long.toString(difference) + " hours";
+                case 4: difference = localBday1.until( localBday2, ChronoUnit.DAYS);
+                        return "The difference: " + Long.toString(difference) + " days";
+                case 5: difference = localBday1.until( localBday2, ChronoUnit.YEARS);
+                        return "The difference: " + Long.toString(difference) + " years";
+            }
+            return "NO INPUT FOUND";
         }
         catch (DateTimeParseException e) {
             return "ERROR, have you used the correct format?";
