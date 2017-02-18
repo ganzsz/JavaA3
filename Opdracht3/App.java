@@ -4,7 +4,7 @@ import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
 
 public class App{
-    private static LocalTime temp = LocalTime.MIN;
+    private static LocalTime displayTime = LocalTime.MIN;
     private static LocalTime baseTime = LocalTime.MIN;
     private static int counter = 2;
     private static boolean pauseCounter;
@@ -20,28 +20,28 @@ public class App{
             public void run(){
                 while(!Thread.currentThread().isInterrupted()) {
                     startTime = System.currentTimeMillis();
-                    while(!x.pause){
+                    while(!x.getPause()){
                         if(pauseCounter){
                             pauseDuration2 += pauseDuration1;
                             pauseCounter = false;
                         }
                         calculateTime(x);
-                        if(x.reset){
+                        if(x.getReset()){
                             resetAction(x);
                             break;
                         }
-                        if(x.lapTimeRecord){
+                        if(x.getLapTimeRecord()){
                             lapTimeAction(x);
                         }
-                        if(x.pause){
+                        if(x.getPause()){
                             pauseTime = System.currentTimeMillis();
                         }
-                        while(x.pause){
-                            if(x.reset){
+                        while(x.getPause()){
+                            if(x.getReset()){
                                 resetAction(x);
                                 break;
                             }
-                            if(x.lapTimeRecord){
+                            if(x.getLapTimeRecord()){
                                 lapTimeAction(x);
                             }
                             pauseDuration1 = System.currentTimeMillis() - pauseTime;
@@ -54,17 +54,18 @@ public class App{
         }.start();
     }
     public static void resetAction(CustomFrame x){
-        temp = LocalTime.MIN;
-        x.lapModel.setElementAt(temp.toString(), 0);
+        displayTime = LocalTime.MIN;
+        pauseTime = 0;
+        pauseDuration1 = 0;
         pauseDuration2 = 0;
-        x.reset = false;
-        //x.pause = true;
+        x.setLapModel("00:00:00.000", 0);
+        x.setPause(true);
+        x.setReset(false);
     }
     public static void lapTimeAction(CustomFrame x){
-        x.lapTimeRecord = false;
-        x.pause = true;
-        x.lapModel.setElementAt(temp.toString(),counter);
-        x.lapTimeRecord = false;
+        x.setPause(true);
+        x.setLapModel(displayTime.toString(),counter);
+        x.setLapTimeRecord(false);
         if(counter == 6){
             counter = 2;
         }
@@ -74,7 +75,7 @@ public class App{
     }
     public static void calculateTime(CustomFrame x){
             currentTime = System.currentTimeMillis();
-            temp = baseTime.plus(currentTime - pauseDuration2 - startTime, ChronoUnit.MILLIS);
-            x.lapModel.setElementAt(temp.toString(), 0);
+            displayTime = baseTime.plus(currentTime - pauseDuration2 - startTime, ChronoUnit.MILLIS);
+            x.setLapModel(displayTime.toString(), 0);
     }
 }

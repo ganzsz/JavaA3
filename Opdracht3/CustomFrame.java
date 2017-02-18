@@ -2,17 +2,17 @@ import javax.swing.*;
 import java.awt.event.*;
 public class CustomFrame extends JFrame {
     private String [] laps;
-    public boolean lapTimeRecord;
-    public boolean reset;
-    public boolean pause;
+    private boolean lapTimeRecord;
+    private boolean reset;
+    private boolean pause;
     private boolean startOrStop;
     private JButton startStop;
     private JButton resetButton;
     private JButton laptimeButton;
     private JPanel buttonPanel;
     private JPanel timerPanel;
-    public DefaultListModel<String> lapModel;
-    public JList<String> lapTime;
+    private DefaultListModel<String> lapModel;
+    private JList<String> lapTime;
 
     public CustomFrame(){
         pause = true;
@@ -67,5 +67,26 @@ public class CustomFrame extends JFrame {
                 System.out.println(pause);
             }
         });
+    }
+    public void setLapModel(String x, int i){
+        lapModel.setElementAt(x, i);
+    }
+    public boolean getReset(){
+        return reset;
+    }
+    public void setReset(boolean reset){
+        this.reset = reset;
+    }
+    public boolean getPause(){
+        return pause;
+    }
+    public void setPause(boolean pause){
+        this.pause = pause;
+    }
+    public boolean getLapTimeRecord(){
+        return lapTimeRecord;
+    }
+    public void setLapTimeRecord(boolean lapTimeRecord){
+        this.lapTimeRecord = lapTimeRecord;
     }
 }
