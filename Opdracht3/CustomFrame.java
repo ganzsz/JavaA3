@@ -68,6 +68,9 @@ public class CustomFrame extends JFrame {
             }
         });
     }
+    public String getLapModel(int i){
+        return lapModel.getElementAt(i);
+    }
     public void setLapModel(String x, int i){
         lapModel.setElementAt(x, i);
     }

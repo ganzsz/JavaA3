@@ -6,7 +6,6 @@ import java.time.temporal.ChronoUnit;
 public class App{
     private static LocalTime displayTime = LocalTime.MIN;
     private static LocalTime baseTime = LocalTime.MIN;
-    private static int counter = 2;
     private static boolean pauseCounter;
     private static long startTime;
     private static long pauseTime;
@@ -63,15 +62,16 @@ public class App{
         x.setReset(false);
     }
     public static void lapTimeAction(CustomFrame x){
+        String [] temp = new String[4];
+        for(int i = 0;  i < temp.length; i++){
+            temp[i] = x.getLapModel(i+2);
+        }
+        for(int i = 0;  i < temp.length; i++){
+            x.setLapModel(displayTime.toString(), 2);
+            x.setLapModel(temp[i], i + 3);
+        }
         x.setPause(true);
-        x.setLapModel(displayTime.toString(),counter);
         x.setLapTimeRecord(false);
-        if(counter == 6){
-            counter = 2;
-        }
-        else{
-            counter++;
-        }
     }
     public static void calculateTime(CustomFrame x){
             currentTime = System.currentTimeMillis();
