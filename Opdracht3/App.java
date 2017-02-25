@@ -67,7 +67,12 @@ public class App{
             temp[i] = x.getLapModel(i+2);
         }
         for(int i = 0;  i < temp.length; i++){
-            x.setLapModel(displayTime.toString(), 2);
+            if(displayTime == LocalTime.MIN){
+                x.setLapModel("00:00:00:000", 2);
+            }
+            else{
+                x.setLapModel(displayTime.toString(), 2);
+            }
             x.setLapModel(temp[i], i + 3);
         }
         x.setPause(true);

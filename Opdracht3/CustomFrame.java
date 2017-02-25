@@ -48,7 +48,6 @@ public class CustomFrame extends JFrame {
             {
                 reset = false;
                 pause = !pause;
-                System.out.println(pause);
             }
         });
         resetButton.addMouseListener(new MouseAdapter()
@@ -56,7 +55,6 @@ public class CustomFrame extends JFrame {
             public void mouseReleased(MouseEvent evt)
             {
                 reset = true;
-                System.out.println(pause);;
             }
         });
         laptimeButton.addMouseListener(new MouseAdapter()
@@ -64,7 +62,6 @@ public class CustomFrame extends JFrame {
             public void mouseReleased(MouseEvent evt)
             {
                 lapTimeRecord = true;
-                System.out.println(pause);
             }
         });
     }
