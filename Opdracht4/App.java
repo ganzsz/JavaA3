@@ -1,18 +1,12 @@
-import java.util.Random;
-
 public class App{
     public static void main(String [] args) throws InterruptedException {
         Dock dock = new Dock();
         Ship ship = new Ship();
-        Crane crane1 = new Crane(ship, dock, 1);
-        Crane crane2 = new Crane(ship, dock, 2);
-        crane1.start();
-        crane2.start();
-
-        try{
-            crane1.join();
-            crane2.join();
+        Crane [] crane = new Crane[2];
+        //Truck [] truck = new Truck[3];
+        for(int i = 0; i < 2; i++){
+            crane[i] = new Crane(ship,dock,i+1);
+            crane[i].start();
         }
-        catch(InterruptedException e){}
     }
 }

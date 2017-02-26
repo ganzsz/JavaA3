@@ -4,6 +4,8 @@ public class Crane extends Thread{
     private Container container;
     private Dock dock;
     private int craneNumber;
+    private int containerID;
+    private int getContainerTime;
     Random rnd = new Random();
     public Crane(Ship ship, Dock dock, int craneNumber){
         this.ship = ship;
@@ -13,11 +15,13 @@ public class Crane extends Thread{
     public void run(){
         try{
             for(int i = 0; i < 100; i++){
+                containerID = ship.getContainerID();
                 System.out.println("Kraan " + craneNumber + " wil container halen");
-                int getContainerTime = rnd.nextInt(5000) + 1000;
+                getContainerTime = rnd.nextInt(5000) + 1000;
                 Crane.sleep(getContainerTime);
                 container = ship.getContainer();
-                System.out.println("Kraan " + craneNumber + " Container" + ship.getContainerID() + " opgehaald...overladen");
+                System.out.println("Kraan " + craneNumber + " Container " + ship.getContainerID() + " opgehaald...overladen");
+                System.out.println("Kraan " + craneNumber + " wil container " + ship.getContainerID() + " plaatsen");
                 dock.placeContainer(container, ship.getContainerID());
             }
         }
