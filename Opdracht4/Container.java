@@ -3,4 +3,7 @@ public class Container{
     public Container(int id){
         this.id = id;
     }
+    public synchronized int getContainerid(){
+        return id;
+    }
 }

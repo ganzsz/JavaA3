@@ -11,11 +11,8 @@ public class Ship{
     public synchronized Container getContainer(){
         Container temp = container[containerID];
         container[containerID] = null;
-        System.out.println("Schip : Container " + (containerID+1) + " gegeven");
         containerID++;
+        System.out.println("Schip : Container " + container[containerID].getContainerid() + " gegeven");
         return temp;
-    }
-    public synchronized int getContainerID(){
-        return containerID;
     }
 }
