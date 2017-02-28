@@ -1,28 +1,31 @@
+import java.util.Random;
 public class Dock{
     private Container[] container;
     private boolean available;
+    private int getContainerTime;
+    private Random rnd = new Random();
     public Dock(){
         container = new Container[5];
+        for(int i = 0; i < container.length; i++){
+            container[i] = null;
+            available = false;
+        }
     }
     public synchronized void placeContainer(Container containerFromCrane){
+        if(isFull()){
+            System.out.println("TEST");
+            available = true;
+            notifyAll();
+        }
         while(available){
             try{
                 wait();
             }
-            catch(InterruptedException e){
-            }
-        }
-        checkForEmptySpots(containerFromCrane);
-        while(isFull()){
-            try{
-                System.out.println("VOL");
-                Crane.sleep(10);
-            }
             catch(InterruptedException e){}
         }
-        available = false;
+        checkForEmptySpots(containerFromCrane);
+        available = true;
         notifyAll();
-        System.out.println("");
     }
     public synchronized Container loadOnTruck(){
         while(!available){
@@ -31,46 +34,25 @@ public class Dock{
             }
             catch(InterruptedException e){}
         }
-        while(isEmpty()){
-            try{
-                //System.out.println("SLAAPIE");
-                Truck.sleep(10);
-            }
-            catch(InterruptedException e){}
-        }
         for(int i = 0; i < container.length; i++){
             if(container[i] == null){}
             else{
                 Container temp = container[i];
                 container[i] = null;
+                available = false;
+                notifyAll();
                 return temp;
             }
         }
-        available = false;
-        notifyAll();
         return null;
     }
-    public boolean isFull(){
+    private boolean isFull(){
         for(int i = 0; i < container.length; i++){
             if(container[i] == null) return false;
         }
         return true;
     }
-    public boolean isEmpty(){
-        int counter = 0;
-        for(int i = 0; i < container.length; i++){
-            if(container[i] == null){
-                counter++;
-            }
-        }
-        if(counter == container.length){
-            System.out.println(counter);
-            return true;
-        }
-        System.out.println("counter " + counter);
-        return false;
-    }
-    public void checkForEmptySpots(Container containerCrane){
+    private void checkForEmptySpots(Container containerCrane){
         for(int i = 0; i < container.length; i++){     //check for empty spots.
             if(container[i] == null){
                 container[i] = containerCrane;

@@ -10,21 +10,9 @@ public class Ship{
     }
     public synchronized Container getContainer(){
         Container temp = container[containerID];
-        System.out.println("Schip : Container " + container[containerID].getContainerid() + " gegeven");
         container[containerID] = null;
         containerID++;
+        System.out.println("Schip : Container " + container[containerID].getContainerid() + " gegeven");
         return temp;
-    }
-    public synchronized boolean isEmpty(){
-        int counter = 0;
-        for(int i = 0; i < container.length; i++){
-            if(container[i] == null){
-                counter++;
-            }
-        }
-        if(counter == container.length - 1){
-            return true;
-        }
-        return false;
     }
 }
