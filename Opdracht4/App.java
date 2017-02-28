@@ -3,7 +3,7 @@ public class App{
         Dock dock = new Dock();
         Ship ship = new Ship();
         Crane [] crane = new Crane[2];
-        Truck [] truck = new Truck[1];
+        Truck [] truck = new Truck[3];
         for(int i = 0; i < crane.length; i++){
             crane[i] = new Crane(ship,dock,i+1);
             crane[i].start();

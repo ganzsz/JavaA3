@@ -22,7 +22,7 @@ public class Ship{
                 counter++;
             }
         }
-        if(counter == container.length - 1){
+        if(counter == container.length){
             return true;
         }
         return false;

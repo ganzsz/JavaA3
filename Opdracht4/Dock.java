@@ -3,6 +3,7 @@ public class Dock{
     private Container[] container;
     private boolean available;
     private int getContainerTime;
+    private long startTime;
     private Random rnd = new Random();
     public Dock(){
         container = new Container[5];
@@ -12,8 +13,8 @@ public class Dock{
         }
     }
     public synchronized void placeContainer(Container containerFromCrane){
+        getContainerTime = rnd.nextInt(5000) + 1000;
         if(isFull()){
-            System.out.println("TEST");
             available = true;
             notifyAll();
         }
@@ -28,6 +29,7 @@ public class Dock{
         notifyAll();
     }
     public synchronized Container loadOnTruck(){
+        getContainerTime = rnd.nextInt(10000) + 1000;
         while(!available){
             try{
                 wait();
@@ -39,6 +41,10 @@ public class Dock{
             else{
                 Container temp = container[i];
                 container[i] = null;
+                try{
+                    Thread.sleep(getContainerTime);
+                }
+                catch(InterruptedException e){}
                 available = false;
                 notifyAll();
                 return temp;
@@ -57,6 +63,10 @@ public class Dock{
             if(container[i] == null){
                 container[i] = containerCrane;
                 System.out.println("Dock : Container " + containerCrane.getContainerid() + " ontvangen op plaats " + i);
+                try{
+                    Thread.sleep(getContainerTime);
+                }
+                catch(InterruptedException e){}
                 break;
             }
             else{
