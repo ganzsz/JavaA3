@@ -5,9 +5,13 @@ public class Dock{
     private int getContainerTime;
     private long startTime;
     private Random rnd = new Random();
+    public int cranesSleeping;
+    public int trucksSleeping;
     public Dock(){
         container = new Container[5];
         for(int i = 0; i < container.length; i++){
+            cranesSleeping = 0;
+            trucksSleeping = 0;
             container[i] = null;
             available = false;
         }
@@ -18,7 +22,7 @@ public class Dock{
             available = true;
             notifyAll();
         }
-        while(available){
+        while(available && trucksSleeping < 2){
             try{
                 wait();
             }
@@ -29,8 +33,8 @@ public class Dock{
         notifyAll();
     }
     public synchronized Container loadOnTruck(){
-        getContainerTime = rnd.nextInt(10000) + 1000;
-        while(!available){
+        getContainerTime = rnd.nextInt(10000) + 10000;
+        while(!available && cranesSleeping < 3){
             try{
                 wait();
             }
@@ -41,10 +45,6 @@ public class Dock{
             else{
                 Container temp = container[i];
                 container[i] = null;
-                try{
-                    Thread.sleep(getContainerTime);
-                }
-                catch(InterruptedException e){}
                 available = false;
                 notifyAll();
                 return temp;
@@ -63,10 +63,6 @@ public class Dock{
             if(container[i] == null){
                 container[i] = containerCrane;
                 System.out.println("Dock : Container " + containerCrane.getContainerid() + " ontvangen op plaats " + i);
-                try{
-                    Thread.sleep(getContainerTime);
-                }
-                catch(InterruptedException e){}
                 break;
             }
             else{
