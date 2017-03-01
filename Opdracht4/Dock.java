@@ -1,10 +1,8 @@
-import java.util.Random;
 public class Dock{
     private Container[] container;
     private boolean available;
     private int getContainerTime;
     private long startTime;
-    private Random rnd = new Random();
     public int cranesSleeping;
     public int trucksSleeping;
     public Dock(){
@@ -17,12 +15,7 @@ public class Dock{
         }
     }
     public synchronized void placeContainer(Container containerFromCrane){
-        getContainerTime = rnd.nextInt(5000) + 1000;
-        if(isFull()){
-            available = true;
-            notifyAll();
-        }
-        while(available && trucksSleeping < 2){
+        while(available && trucksSleeping < 2 || isFull()){
             try{
                 wait();
             }
@@ -33,7 +26,6 @@ public class Dock{
         notifyAll();
     }
     public synchronized Container loadOnTruck(){
-        getContainerTime = rnd.nextInt(10000) + 10000;
         while(!available && cranesSleeping < 3){
             try{
                 wait();
@@ -56,6 +48,8 @@ public class Dock{
         for(int i = 0; i < container.length; i++){
             if(container[i] == null) return false;
         }
+        available = true;
+        notifyAll();
         return true;
     }
     private void checkForEmptySpots(Container containerCrane){
