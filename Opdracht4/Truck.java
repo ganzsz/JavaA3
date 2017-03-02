@@ -14,11 +14,11 @@ public class Truck extends Thread{
     public void run(){
         while(true){
             rnd = new Random();
-            getContainerTime = rnd.nextInt(5000) + 1000;
+            getContainerTime = rnd.nextInt(7000) + 1000; //staat niet specifiek bij hoe lang het moet duren.
             System.out.println("Truck " + truckNumber + ": wil container ophalen.");
             container = dock.loadOnTruck(truckNumber);
             try{
-                sleep(10000);
+                sleep(getContainerTime); //7000 is de "sweetspot zodat de vakken vullen maar de kranen niet hoeven te wachten."
                 dock.editTrucksSleeping("--");
             }
             catch(InterruptedException e){}

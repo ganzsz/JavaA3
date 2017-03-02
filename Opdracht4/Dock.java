@@ -28,7 +28,7 @@ public class Dock{
             catch(InterruptedException e){}
         }
         if(containerFromCrane.getContainerid() == 99){
-            cranesSleeping = 3;
+            cranesSleeping = 10;
         }
         checkForEmptySpots(containerFromCrane);
         displaySpotStatus();
