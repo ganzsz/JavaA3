@@ -23,6 +23,7 @@ public class Ship{
             }
         }
         if(counter == container.length){
+            System.out.println("Schip leeg");
             return true;
         }
         return false;

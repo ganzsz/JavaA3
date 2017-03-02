@@ -17,13 +17,10 @@ public class Crane extends Thread{
         while(!ship.isEmpty()){
             System.out.println("Kraan " + craneNumber + " : wil container halen");
             container = ship.getContainer();
-            System.out.println("Kraan " + craneNumber + " : Container " + container.getContainerid() + " opgehaald...overladen");
-            System.out.println("Kraan " + craneNumber + " : wil container " + container.getContainerid() + " plaatsen");
-            dock.placeContainer(container);
+            dock.placeContainer(container, craneNumber);
             try{
-                dock.cranesSleeping++;
                 sleep(getContainerTime);
-                dock.cranesSleeping--;
+                dock.editCranesSleeping("--");
             }
             catch(InterruptedException e){}
         }

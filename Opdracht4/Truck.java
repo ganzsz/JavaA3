@@ -14,14 +14,12 @@ public class Truck extends Thread{
     public void run(){
         while(run){
             rnd = new Random();
-            getContainerTime = rnd.nextInt(10000) + 5000;
+            getContainerTime = rnd.nextInt(5000) + 1000;
             System.out.println("Truck " + truckNumber + ": wil container ophalen.");
-            container = dock.loadOnTruck();
-            System.out.println("Truck " + truckNumber + ": container " + container.getContainerid() + " opgehaald...wegrijden");
+            container = dock.loadOnTruck(truckNumber);
             try{
-                dock.trucksSleeping++; //to prevent the cranes waiting on the trucks if both trucks sleep.
-                sleep(getContainerTime);
-                dock.trucksSleeping--;
+                sleep(20000);
+                dock.editTrucksSleeping("--");
             }
             catch(InterruptedException e){}
         }
