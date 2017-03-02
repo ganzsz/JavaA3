@@ -1,6 +1,7 @@
 import java.util.Random;
 public class Dock{
     private Container[] container;
+    private Container truckContainer;
     private boolean available;
     private long startTime;
     private int cranesSleeping;
@@ -26,6 +27,9 @@ public class Dock{
             }
             catch(InterruptedException e){}
         }
+        if(containerFromCrane.getContainerid() == 99){
+            cranesSleeping = 3;
+        }
         checkForEmptySpots(containerFromCrane);
         displaySpotStatus();
         available = true;
@@ -39,19 +43,8 @@ public class Dock{
             }
             catch(InterruptedException e){}
         }
-        for(int i = 0; i < container.length; i++){
-            if(container[i] == null){}
-            else{
-                Container temp = container[i];
-                container[i] = null;
-                available = false;
-                notifyAll();
-                editTrucksSleeping("++");
-                System.out.println("Truck " + truckNumber + ": container " + temp.getContainerid() + " opgehaald...wegrijden");
-                return temp;
-            }
-        }
-        return null;
+        searchForContainer(truckNumber);
+        return truckContainer;
     }
     private boolean isFull(){
         for(int i = 0; i < container.length; i++){
@@ -60,18 +53,6 @@ public class Dock{
         available = true;
         notifyAll();
         return true;
-    }
-    private boolean isEmpty(){
-        int counter =0;
-        for(int i = 0; i < container.length; i++){
-            if(container[i] == null) counter++;
-        }
-        if(counter == container.length){
-            available = false;
-            notifyAll();
-            return true;
-        }
-        else return false;
     }
     private void checkForEmptySpots(Container containerCrane){
         for(int i = 0; i < container.length; i++){     //check for empty spots.
@@ -93,6 +74,33 @@ public class Dock{
             }
         }
         System.out.println("");
+    }
+    private void searchForContainer(int truckNumber){
+        while(true){
+            loadRandomContainer = rnd.nextInt(container.length);
+            if(container[loadRandomContainer] == null);
+            else{
+                truckContainer = container[loadRandomContainer];
+                container[loadRandomContainer] = null;
+                available = false;
+                notifyAll();
+                editTrucksSleeping("++");
+                System.out.println("Truck " + truckNumber + ": container " + truckContainer.getContainerid() + " opgehaald...wegrijden");
+                break;
+            }
+        }
+    }
+    private boolean isEmpty(){
+        int counter =0;
+        for(int i = 0; i < container.length; i++){
+            if(container[i] == null) counter++;
+        }
+        if(counter == container.length){
+            available = false;
+            notifyAll();
+            return true;
+        }
+        else return false;
     }
     public synchronized void editCranesSleeping(String i){
         if(i == "--"){
