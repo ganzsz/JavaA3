@@ -67,13 +67,13 @@ public class CustomFrame extends JFrame {
             if(e.getSource() == calculateAge){
                 birthDay1String = bday1Input.getText();
                 solution = Calculations.calculateAge(birthDay1String, differenceList.getSelectedIndex());
-                output.setText(solution);
+                output.setText("Your age: " + solution);
             }
             else if(e.getSource() == calculateDifference){
                 birthDay1String = bday1Input.getText();
                 birthDay2String = bday2Input.getText();
                 solution = Calculations.calculateDifference(birthDay1String, birthDay2String, differenceList.getSelectedIndex());
-                output.setText(solution);
+                output.setText("The difference: " + solution);
             }
         }
     }
